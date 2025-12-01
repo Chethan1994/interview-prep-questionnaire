@@ -1,5 +1,7 @@
+
 import React from 'react';
 import { Button } from './Button';
+import { GoogleAd } from './GoogleAd';
 import { CheckCircle, Code2, Cpu, Globe, Zap, ShieldCheck, UserCheck, ShoppingBag, BookOpen, ExternalLink, Mail } from 'lucide-react';
 
 interface LandingPageProps {
@@ -33,7 +35,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch }) => {
         </h1>
         
         <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed animate-slide-up" style={{ animationDelay: '0.1s' }}>
-          The all-in-one platform for software engineers. Practice real-world coding challenges, system design, and behavioral questions with AI-powered feedback.
+          The all-in-one platform for software engineers. Practice real-world coding challenges, system design, and behavioral questions with automated feedback.
         </p>
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up" style={{ animationDelay: '0.2s' }}>
@@ -46,8 +48,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch }) => {
         </div>
       </section>
 
-      {/* Ad Placeholder 1 */}
-      <AdPlaceholder label="Sponsored: Cloud Hosting Solutions for Developers" />
+      {/* Ad Unit 1 */}
+      <GoogleAd label="Sponsored: Cloud Hosting Solutions for Developers" />
 
       {/* Features Grid */}
       <section className="py-24 bg-dark-800/50 relative">
@@ -66,7 +68,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch }) => {
             />
             <FeatureCard 
               icon={<Cpu className="text-purple-400" />}
-              title="AI Grading Engine"
+              title="Smart Grading Engine"
               description="Get instant, detailed feedback on your code efficiency, readability, and logic."
               delay="0.1s"
             />
@@ -115,8 +117,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch }) => {
         </div>
       </section>
 
-      {/* Ad Placeholder 2 */}
-      <AdPlaceholder label="Sponsored: Best React Courses on Udemy - 90% OFF" />
+      {/* Ad Unit 2 */}
+      <GoogleAd label="Sponsored: Best React Courses on Udemy - 90% OFF" />
 
       {/* Revenue Stream: Digital Products (Shop) */}
       <section id="shop" className="py-24 bg-dark-800/30 relative border-y border-white/5">
@@ -190,14 +192,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch }) => {
       <section id="pricing" className="py-24 container mx-auto px-4">
          <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Subscription Plans</h2>
-            <p className="text-slate-400">Unlock unlimited AI practice and advanced features.</p>
+            <p className="text-slate-400">Unlock unlimited practice and advanced features.</p>
          </div>
 
          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <PricingCard 
               tier="Free Tier"
               price="$0"
-              features={['3 AI Interviews per month', 'Basic JS Questions', 'Community Support']}
+              features={['3 Interviews per month', 'Basic JS Questions', 'Community Support']}
               active={false}
               delay="0s"
             />
@@ -205,7 +207,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch }) => {
               tier="Pro"
               price="$29"
               period="/mo"
-              features={['Unlimited AI Interviews', 'Advanced React & System Design', 'Detailed Code Reviews', 'Priority Support']}
+              features={['Unlimited Interviews', 'Advanced React & System Design', 'Detailed Code Reviews', 'Priority Support']}
               active={true}
               recommended
               delay="0.1s"
@@ -248,15 +250,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch }) => {
 };
 
 // --- Helper Components ---
-
-const AdPlaceholder = ({ label }: { label: string }) => (
-  <div className="container mx-auto px-4 py-8">
-    <div className="w-full h-32 bg-dark-800/30 border border-dashed border-slate-700 rounded-xl flex flex-col items-center justify-center text-slate-600 gap-2 select-none">
-      <span className="text-xs font-mono uppercase tracking-widest border border-slate-700 px-2 py-1 rounded">Advertisement Space</span>
-      <span className="text-sm font-medium text-slate-500">{label}</span>
-    </div>
-  </div>
-);
 
 const FeatureCard = ({ icon, title, description, delay }: { icon: React.ReactNode, title: string, description: string, delay: string }) => (
   <div 

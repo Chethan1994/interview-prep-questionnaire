@@ -1,3 +1,4 @@
+
 export enum Difficulty {
   Junior = 'Junior',
   MidLevel = 'Mid-Level',
@@ -35,4 +36,23 @@ export interface InterviewSessionData {
   difficulty: Difficulty;
   questions: Question[];
   currentQuestionIndex: number;
+}
+
+export interface UserProfile {
+  id: string;
+  name: string;
+  email: string;
+  picture: string;
+}
+
+export interface Submission {
+  id: string;
+  contributorName: string;
+  contributorEmail: string;
+  role: string;
+  topic: string;
+  question: string;
+  answer: string;
+  codeExample?: string;
+  timestamp: number;
 }
