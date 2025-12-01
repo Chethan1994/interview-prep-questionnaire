@@ -8,8 +8,7 @@ export enum Difficulty {
 export enum AppStatus {
   Idle = 'idle',
   GeneratingQuestions = 'generating_questions',
-  Interviewing = 'interviewing',
-  Evaluating = 'evaluating', // Evaluating a single answer
+  Interviewing = 'interviewing', // Re-used for "Studying" state
   Results = 'results',
   Error = 'error'
 }
@@ -24,16 +23,10 @@ export interface Question {
   text: string;
   hint: string;
   topic: string;
-  type?: QuestionType; // Defaults to Text if undefined
-  modelAnswer?: string; // Pre-defined answer or code solution
-}
-
-export interface Evaluation {
-  questionId: string;
-  score: number; // 1-10
-  feedback: string;
-  idealAnswer: string;
-  userAnswer: string;
+  type?: QuestionType;
+  modelAnswer?: string; // For curated questions
+  answer?: string; // For AI generated questions (merged in UI)
+  example?: string; // Simple code example
 }
 
 export interface InterviewSessionData {
@@ -41,6 +34,5 @@ export interface InterviewSessionData {
   jobRole: string;
   difficulty: Difficulty;
   questions: Question[];
-  evaluations: Record<string, Evaluation>;
   currentQuestionIndex: number;
 }

@@ -5,7 +5,7 @@ import { ResultsScreen } from './components/ResultsScreen';
 import { LandingPage } from './components/LandingPage';
 import { Navbar } from './components/Navbar';
 import { AppStatus, Difficulty, InterviewSessionData } from './types';
-import { generateInterviewQuestions, evaluateAnswer } from './services/geminiService';
+import { generateInterviewQuestions } from './services/geminiService';
 import { QUESTION_COUNT } from './constants';
 import { CURATED_JS_INTERVIEW } from './data/curatedQuestions';
 
@@ -28,12 +28,11 @@ const App: React.FC = () => {
         jobRole: role,
         difficulty,
         questions,
-        evaluations: {},
         currentQuestionIndex: 0
       });
       setStatus(AppStatus.Interviewing);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to start interview');
+      setError(err instanceof Error ? err.message : 'Failed to generate study material');
       setStatus(AppStatus.Error);
     }
   };
@@ -44,52 +43,27 @@ const App: React.FC = () => {
       jobRole: 'Senior Developer',
       difficulty: Difficulty.Senior,
       questions: CURATED_JS_INTERVIEW,
-      evaluations: {},
       currentQuestionIndex: 0
     });
     setStatus(AppStatus.Interviewing);
   };
 
-  const handleAnswerSubmit = async (answer: string) => {
+  const handleNextQuestion = () => {
     if (!session) return;
 
-    const currentQuestion = session.questions[session.currentQuestionIndex];
+    const nextIndex = session.currentQuestionIndex + 1;
     
-    setStatus(AppStatus.Evaluating);
-
-    try {
-      const evaluation = await evaluateAnswer(
-        currentQuestion, 
-        answer, 
-        session.jobRole, 
-        session.difficulty
-      );
-
-      const nextEvaluations = {
-        ...session.evaluations,
-        [currentQuestion.id]: evaluation
-      };
-
-      const nextIndex = session.currentQuestionIndex + 1;
-      
-      if (nextIndex >= session.questions.length) {
-        setSession({
-          ...session,
-          evaluations: nextEvaluations,
-          currentQuestionIndex: nextIndex // End of list
-        });
-        setStatus(AppStatus.Results);
-      } else {
-        setSession({
-          ...session,
-          evaluations: nextEvaluations,
-          currentQuestionIndex: nextIndex
-        });
-        setStatus(AppStatus.Interviewing);
-      }
-    } catch (err) {
-       setError("Failed to submit answer. Please try again.");
-       setStatus(AppStatus.Interviewing); 
+    if (nextIndex >= session.questions.length) {
+      setSession({
+        ...session,
+        currentQuestionIndex: nextIndex // End of list
+      });
+      setStatus(AppStatus.Results);
+    } else {
+      setSession({
+        ...session,
+        currentQuestionIndex: nextIndex
+      });
     }
   };
 
@@ -153,17 +127,17 @@ const App: React.FC = () => {
                   <div className="absolute inset-0 border-4 border-dark-700 rounded-full"></div>
                   <div className="absolute inset-0 border-4 border-indigo-500 rounded-full border-t-transparent animate-spin"></div>
                 </div>
-                <h2 className="text-2xl font-bold text-white mb-2">Curating Your Session</h2>
-                <p className="text-slate-400">AI is analyzing current industry trends...</p>
+                <h2 className="text-2xl font-bold text-white mb-2">Generating Study Guide</h2>
+                <p className="text-slate-400">AI is curating questions and detailed answers...</p>
               </div>
             )}
 
-            {(status === AppStatus.Interviewing || status === AppStatus.Evaluating) && session && (
+            {status === AppStatus.Interviewing && session && (
               <QuestionScreen 
                 question={session.questions[session.currentQuestionIndex]}
                 currentIndex={session.currentQuestionIndex}
                 totalQuestions={session.questions.length}
-                onAnswerSubmit={handleAnswerSubmit}
+                onNext={handleNextQuestion}
                 status={status}
               />
             )}
@@ -171,7 +145,6 @@ const App: React.FC = () => {
             {status === AppStatus.Results && session && (
               <ResultsScreen 
                 questions={session.questions}
-                evaluations={session.evaluations}
                 onRestart={restartApp}
               />
             )}

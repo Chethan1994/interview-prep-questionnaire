@@ -1,4 +1,4 @@
-export const QUESTION_COUNT = 3;
+export const QUESTION_COUNT = 20;
 
 export const SAMPLE_ROLES = [
   "Full Stack Developer",

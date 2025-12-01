@@ -22,10 +22,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
         </div>
 
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
-          <a href="#" className="hover:text-white transition-colors">Career Paths</a>
-          <a href="#" className="hover:text-white transition-colors">Mentorship</a>
-          <a href="#" className="hover:text-white transition-colors">Enterprise</a>
-          <a href="#" className="hover:text-white transition-colors">Pricing</a>
+          <a href="#services" className="hover:text-white transition-colors">Coaching</a>
+          <a href="#shop" className="hover:text-white transition-colors">Shop</a>
+          <a href="#resources" className="hover:text-white transition-colors">Resources</a>
+          <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
         </div>
 
         <div className="flex items-center gap-4">

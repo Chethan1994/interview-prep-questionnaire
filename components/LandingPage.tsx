@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from './Button';
-import { CheckCircle, Code2, Cpu, Globe, Zap, ShieldCheck } from 'lucide-react';
+import { CheckCircle, Code2, Cpu, Globe, Zap, ShieldCheck, UserCheck, ShoppingBag, BookOpen, ExternalLink, Mail } from 'lucide-react';
 
 interface LandingPageProps {
   onLaunch: () => void;
@@ -8,7 +8,7 @@ interface LandingPageProps {
 
 export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch }) => {
   return (
-    <div className="animate-fade-in pt-20 overflow-x-hidden">
+    <div className="animate-fade-in pt-20 overflow-x-hidden scroll-smooth">
       {/* Hero Section */}
       <section className="relative py-20 md:py-32 px-4 text-center">
         {/* Animated Background Elements */}
@@ -44,15 +44,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch }) => {
             View Pricing
           </button>
         </div>
-        
-        <div className="mt-16 pt-8 border-t border-white/5 flex flex-wrap justify-center gap-8 md:gap-16 text-slate-500 font-medium animate-slide-up" style={{ animationDelay: '0.3s' }}>
-          <span className="flex items-center gap-2"><Globe size={20} /> Used by devs from</span>
-          <span className="hover:text-slate-300 transition-colors cursor-default">GOOGLE</span>
-          <span className="hover:text-slate-300 transition-colors cursor-default">META</span>
-          <span className="hover:text-slate-300 transition-colors cursor-default">AMAZON</span>
-          <span className="hover:text-slate-300 transition-colors cursor-default">NETFLIX</span>
-        </div>
       </section>
+
+      {/* Ad Placeholder 1 */}
+      <AdPlaceholder label="Sponsored: Cloud Hosting Solutions for Developers" />
 
       {/* Features Grid */}
       <section className="py-24 bg-dark-800/50 relative">
@@ -85,11 +80,117 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch }) => {
         </div>
       </section>
 
-      {/* Pricing Section (Income Generation) */}
-      <section className="py-24 container mx-auto px-4">
+      {/* Revenue Stream: Paid Coaching Services */}
+      <section id="services" className="py-24 container mx-auto px-4">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-pink-500/10 text-pink-400 mb-4">
+            <UserCheck size={24} />
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">1-on-1 Expert Coaching</h2>
+          <p className="text-slate-400 max-w-2xl mx-auto">Get personalized feedback from Senior Engineers at top tech companies. Perfect for your final round preparation.</p>
+        </div>
+        
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <ServiceCard 
+            title="Mock Interview"
+            price="$49"
+            duration="45 mins"
+            description="Simulated technical interview with real-time feedback on DSA & System Design."
+            tags={['Video Call', 'Written Feedback']}
+          />
+          <ServiceCard 
+            title="Portfolio Review"
+            price="$29"
+            duration="Async"
+            description="Deep dive review of your GitHub and Portfolio projects to highlight your strengths."
+            tags={['Code Audit', 'Resume Tips']}
+          />
+          <ServiceCard 
+            title="Career Consultation"
+            price="$69"
+            duration="60 mins"
+            description="Strategic career planning, salary negotiation tips, and roadmap creation."
+            tags={['Strategy', 'Q&A']}
+          />
+        </div>
+      </section>
+
+      {/* Ad Placeholder 2 */}
+      <AdPlaceholder label="Sponsored: Best React Courses on Udemy - 90% OFF" />
+
+      {/* Revenue Stream: Digital Products (Shop) */}
+      <section id="shop" className="py-24 bg-dark-800/30 relative border-y border-white/5">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
+            <div>
+              <h2 className="text-3xl font-bold text-white mb-2 flex items-center gap-3">
+                <ShoppingBag className="text-emerald-400" /> Premium Resources
+              </h2>
+              <p className="text-slate-400">Downloadable cheat sheets and guides to study offline.</p>
+            </div>
+            <button className="text-emerald-400 font-medium hover:text-emerald-300 flex items-center gap-2">
+              View All Products <ExternalLink size={16} />
+            </button>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <ProductCard 
+              title="React Interview Handbook"
+              price="$9.99"
+              type="PDF E-Book"
+              image="https://placehold.co/400x300/1e293b/emerald?text=React+PDF"
+            />
+            <ProductCard 
+              title="System Design Templates"
+              price="$14.99"
+              type="Design Pack"
+              image="https://placehold.co/400x300/1e293b/purple?text=System+Design"
+            />
+            <ProductCard 
+              title="Node.js Microservices Guide"
+              price="$12.99"
+              type="Video Course"
+              image="https://placehold.co/400x300/1e293b/orange?text=Node+Course"
+            />
+            <ProductCard 
+              title="Frontend 100 Q&A"
+              price="$4.99"
+              type="Cheat Sheet"
+              image="https://placehold.co/400x300/1e293b/blue?text=Q%26A+Sheet"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Revenue Stream: Affiliate Resources */}
+      <section id="resources" className="py-24 container mx-auto px-4">
+        <h2 className="text-2xl font-bold text-white text-center mb-10 flex items-center justify-center gap-2">
+           <BookOpen className="text-indigo-400" /> Recommended Learning Paths
+        </h2>
+        <div className="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+          <AffiliateLink 
+             name="Complete React Developer 2025"
+             platform="Udemy"
+             desc="The highest rated React course on the web."
+          />
+          <AffiliateLink 
+             name="AWS Certified Solutions Architect"
+             platform="Coursera"
+             desc="Get certified and increase your salary."
+          />
+          <AffiliateLink 
+             name="Grokking System Design"
+             platform="Educative.io"
+             desc="Essential for L5+ engineering roles."
+          />
+        </div>
+      </section>
+
+      {/* Pricing Section (SaaS Revenue) */}
+      <section id="pricing" className="py-24 container mx-auto px-4">
          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Simple, Transparent Pricing</h2>
-            <p className="text-slate-400">Invest in your career with plans that scale with your ambition.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Subscription Plans</h2>
+            <p className="text-slate-400">Unlock unlimited AI practice and advanced features.</p>
          </div>
 
          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -119,9 +220,43 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch }) => {
             />
          </div>
       </section>
+
+      {/* Revenue Stream: Newsletter */}
+      <section className="py-20 bg-indigo-900/20 border-t border-indigo-500/20">
+        <div className="container mx-auto px-4 text-center max-w-2xl">
+           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-500/20 text-indigo-300 mb-6">
+             <Mail size={32} />
+           </div>
+           <h2 className="text-3xl font-bold text-white mb-4">Join the Elite Developer Circle</h2>
+           <p className="text-slate-300 mb-8">
+             Get weekly React tips, system design deep dives, and exclusive discount codes for our premium tools.
+           </p>
+           <form className="flex flex-col sm:flex-row gap-4">
+             <input 
+               type="email" 
+               placeholder="Enter your email address" 
+               className="flex-1 px-6 py-4 rounded-xl bg-dark-900 border border-slate-700 text-white focus:ring-2 focus:ring-indigo-500 outline-none"
+             />
+             <Button className="whitespace-nowrap">Subscribe Free</Button>
+           </form>
+           <p className="text-xs text-slate-500 mt-4">No spam, unsubscribe at any time.</p>
+        </div>
+      </section>
+
     </div>
   );
 };
+
+// --- Helper Components ---
+
+const AdPlaceholder = ({ label }: { label: string }) => (
+  <div className="container mx-auto px-4 py-8">
+    <div className="w-full h-32 bg-dark-800/30 border border-dashed border-slate-700 rounded-xl flex flex-col items-center justify-center text-slate-600 gap-2 select-none">
+      <span className="text-xs font-mono uppercase tracking-widest border border-slate-700 px-2 py-1 rounded">Advertisement Space</span>
+      <span className="text-sm font-medium text-slate-500">{label}</span>
+    </div>
+  </div>
+);
 
 const FeatureCard = ({ icon, title, description, delay }: { icon: React.ReactNode, title: string, description: string, delay: string }) => (
   <div 
@@ -133,6 +268,52 @@ const FeatureCard = ({ icon, title, description, delay }: { icon: React.ReactNod
     </div>
     <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
     <p className="text-slate-400 leading-relaxed">{description}</p>
+  </div>
+);
+
+const ServiceCard = ({ title, price, duration, description, tags }: any) => (
+  <div className="p-6 rounded-2xl bg-dark-900 border border-white/5 hover:border-pink-500/30 transition-all group">
+    <div className="flex justify-between items-start mb-4">
+      <h3 className="text-xl font-bold text-white">{title}</h3>
+      <span className="px-3 py-1 rounded-full bg-pink-500/10 text-pink-400 text-xs font-bold">{duration}</span>
+    </div>
+    <div className="text-3xl font-bold text-white mb-4">{price}</div>
+    <p className="text-slate-400 text-sm mb-6">{description}</p>
+    <div className="flex flex-wrap gap-2 mb-6">
+      {tags.map((t: string) => (
+        <span key={t} className="text-xs px-2 py-1 bg-dark-800 text-slate-500 rounded">{t}</span>
+      ))}
+    </div>
+    <Button variant="secondary" className="w-full text-sm">Book Session</Button>
+  </div>
+);
+
+const ProductCard = ({ title, price, type, image }: any) => (
+  <div className="rounded-xl overflow-hidden bg-dark-900 border border-white/5 group hover:border-emerald-500/30 transition-all">
+    <div className="h-40 bg-dark-800 relative overflow-hidden">
+      <img src={image} alt={title} className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500" />
+      <div className="absolute top-2 right-2 px-2 py-1 bg-black/60 backdrop-blur text-xs font-bold text-white rounded">{type}</div>
+    </div>
+    <div className="p-4">
+      <h4 className="font-bold text-white mb-1">{title}</h4>
+      <div className="flex justify-between items-center mt-4">
+        <span className="text-emerald-400 font-bold">{price}</span>
+        <button className="text-xs bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded hover:bg-emerald-500 hover:text-white transition-colors">
+          Buy Now
+        </button>
+      </div>
+    </div>
+  </div>
+);
+
+const AffiliateLink = ({ name, platform, desc }: any) => (
+  <div className="flex items-center gap-4 p-4 rounded-xl bg-dark-900 border border-white/5 hover:bg-dark-800 transition-colors cursor-pointer">
+    <div className="w-12 h-12 rounded bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-500">IMG</div>
+    <div className="flex-1">
+      <h5 className="text-white font-medium">{name}</h5>
+      <p className="text-xs text-slate-500">{platform} • {desc}</p>
+    </div>
+    <ExternalLink size={16} className="text-slate-600" />
   </div>
 );
 
